@@ -90,6 +90,12 @@ func main() {
 		log.Fatal(err)
 	}
 
+	// Pull changes to branch
+	err = git.Pull(path, config.Global.Git.Username, config.Global.Git.Token)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	// Read in Markdown file for container if exists
 	article, err := repo.ParseArticle(libraryPath, currentContainer)
 	if err != nil {
