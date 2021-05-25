@@ -1,0 +1,67 @@
+name: 'Librarian'
+description: 'Librarian keeps the Autamus Library in Check'
+inputs:
+  repo_path:
+    description: 'Location of the Git Repository'
+    required: false
+    default: '/github/workspace/'
+  repo_pagesbranch:
+    description: 'Branch which houses the git pages site.'
+    required: false
+    default: 'gh-pages'
+  packages_path:
+    description: 'Relative location of the packages with respect to the Git Repository'
+    required: false
+    default: 'spack'
+  containers_path:
+    description: 'Relative location of the containers with respect to the Git Repository'
+    required: false
+    default: 'containers'
+  containers_current:
+    description: 'Is the current container to generate docs for.'
+    required: true
+  containers_version:
+    description: 'Is the current version of the container built.'
+    required: false
+    default: 'latest'
+  containers_defaultenvpath:
+    description: 'Path to the default spack environment.'
+    required: false
+    default: 'default.yaml'
+  containers_size:
+    description: 'The size of the current container.'
+    required: false
+    default: 'Unknown'
+  parsers_loaded:
+    description: 'Similar to Binoc which parsers to use on the repository seperated by commas.'
+    default: 'spack'
+    required: false
+  git_name:
+    description: 'Name used within Git for the commits'
+    required: false
+    default: 'Librarian'
+  git_email:
+    description: 'Email used within Git for the commits'
+    required: false
+    default: 'github-action@users.noreply.github.com'
+  git_username:
+    description: 'Username used within Git for pushing commits'
+    required: false
+    default: 'actions-user'
+  git_token:
+    description: 'Token used for authenticating with the upstream repository'
+    required: true
+  template_path:
+    description: 'Is the path to the markdown template.'
+    required: true
+  library_path: 
+    description: 'Is the path to the output library folder.'
+    required: false
+    default: '_library'
+
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/autamus/librarian:latest'
+branding:
+  icon: 'activity'
+  color: 'white'
