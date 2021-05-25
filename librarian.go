@@ -79,14 +79,8 @@ func main() {
 			log.Fatal(err)
 		}
 	}
-	fmt.Println("Checking for original branch name")
-	originalBranch, err := git.GetBranchName(path)
-	if err != nil {
-		log.Fatal(err)
-	}
 
 	// Switch to gh-pages branch
-	fmt.Println("Switching Branch")
 	err = git.SwitchBranch(path, pagesBranch)
 	if err != nil {
 		log.Fatal(err)
@@ -110,7 +104,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Committing Article")
 	// Commit changes to repository
 	err = git.Commit(path, fmt.Sprintf("Update %s to %s at %s",
 		currentContainer,
@@ -123,15 +116,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Pushing Changes")
 	// Push changes back to repository
 	err = git.Push(path, config.Global.Git.Username, config.Global.Git.Token)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	fmt.Println("Switching Back")
-	err = git.SwitchBranch(path, originalBranch)
 	if err != nil {
 		log.Fatal(err)
 	}
