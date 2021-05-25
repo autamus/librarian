@@ -90,6 +90,8 @@ func main() {
 		log.Fatal(err)
 	}
 
+	fmt.Println("Pull Changes from Branch")
+
 	// Pull changes to branch
 	err = git.Pull(path, config.Global.Git.Username, config.Global.Git.Token)
 	if err != nil {
@@ -114,6 +116,8 @@ func main() {
 		log.Fatal(err)
 	}
 
+	fmt.Println("Commit")
+
 	// Commit changes to repository
 	err = git.Commit(path, fmt.Sprintf("Update %s to %s at %s",
 		currentContainer,
@@ -125,6 +129,8 @@ func main() {
 	for err != nil {
 		log.Fatal(err)
 	}
+
+	fmt.Println("Push")
 
 	// Push changes back to repository
 	err = git.Push(path, config.Global.Git.Username, config.Global.Git.Token)
