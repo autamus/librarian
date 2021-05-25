@@ -103,14 +103,14 @@ func main() {
 	article.SetSize(currentSize)
 	article.SetDate(time.Now())
 
-	err = repo.WriteArticle(libraryPath, templatePath, article)
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	// Pull changes to branch
 	err = git.Pull(path, config.Global.Git.Username, config.Global.Git.Token)
 	if err != nil && err.Error() != "already up-to-date" {
+		log.Fatal(err)
+	}
+
+	err = repo.WriteArticle(libraryPath, templatePath, article)
+	if err != nil {
 		log.Fatal(err)
 	}
 
