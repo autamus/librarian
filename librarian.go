@@ -90,14 +90,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Pull Changes from Branch")
-
-	// Pull changes to branch
-	err = git.Pull(path, config.Global.Git.Username, config.Global.Git.Token)
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	// Read in Markdown file for container if exists
 	article, err := repo.ParseArticle(libraryPath, currentContainer)
 	if err != nil {
@@ -130,8 +122,15 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Push")
+	fmt.Println("Pull Changes from Branch")
 
+	// Pull changes to branch
+	err = git.Pull(path, config.Global.Git.Username, config.Global.Git.Token)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("Push")
 	// Push changes back to repository
 	err = git.Push(path, config.Global.Git.Username, config.Global.Git.Token)
 	for err != nil {
