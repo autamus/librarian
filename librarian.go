@@ -122,14 +122,19 @@ func main() {
 		config.Global.Git.Name,
 		config.Global.Git.Email,
 	)
-	if err != nil {
+	for err != nil {
 		log.Fatal(err)
 	}
 
 	// Push changes back to repository
 	err = git.Push(path, config.Global.Git.Username, config.Global.Git.Token)
-	if err != nil {
-		log.Fatal(err)
+	for err != nil {
+		fmt.Println("Retrying Commit...")
+		err = git.Pull(path, config.Global.Git.Username, config.Global.Git.Token)
+		if err != nil {
+			log.Fatal(err)
+		}
+		err = git.Push(path, config.Global.Git.Username, config.Global.Git.Token)
 	}
 
 	err = git.SwitchBranch(path, originalBranch)
