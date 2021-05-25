@@ -108,6 +108,12 @@ func main() {
 		log.Fatal(err)
 	}
 
+	// Pull changes to branch
+	err = git.Pull(path, config.Global.Git.Username, config.Global.Git.Token)
+	if err != nil && err.Error() != "already up-to-date" {
+		log.Fatal(err)
+	}
+
 	// Commit changes to repository
 	err = git.Commit(path, fmt.Sprintf("Update %s to %s at %s",
 		currentContainer,
@@ -117,12 +123,6 @@ func main() {
 		config.Global.Git.Email,
 	)
 	for err != nil {
-		log.Fatal(err)
-	}
-
-	// Pull changes to branch
-	err = git.Pull(path, config.Global.Git.Username, config.Global.Git.Token)
-	if err != nil {
 		log.Fatal(err)
 	}
 
