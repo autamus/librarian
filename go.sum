@@ -112,8 +112,8 @@ github.com/asaskevich/govalidator v0.0.0-20190424111038-f61b66f89f4a/go.mod h1:l
 github.com/autamus/binoc v0.2.8/go.mod h1:CC4BfGRfuFQ6XIK38KJjLjSovGSvgBSTSEnfWxXA090=
 github.com/autamus/binoc v0.3.2 h1:NV7ALAy/7/yU6VwWFiSXEGI+9wyMupuArSGgR+4welI=
 github.com/autamus/binoc v0.3.2/go.mod h1:w2rsPrrx5HVzesZJKNCjwX38tujE99ZhcEC1uCnpElg=
-github.com/autamus/builder v0.0.8 h1:sgipH7IAb1E3wn1fXjkfQR8T5+4amvkEtoOU5vv7b/U=
-github.com/autamus/builder v0.0.8/go.mod h1:bbA6+Yz9QWS62G9huL/gdTGXgVvI5fdkllheWeJoAlQ=
+github.com/autamus/builder v0.0.9 h1:559kn69YdYbUxQFEyJhdefYAa/6Z8NWykVEQVzNguEQ=
+github.com/autamus/builder v0.0.9/go.mod h1:bbA6+Yz9QWS62G9huL/gdTGXgVvI5fdkllheWeJoAlQ=
 github.com/autamus/go-parspack v0.2.0/go.mod h1:eOgRsyaj7Ctq6HndHaUPjkqf9bGkeehFyr9sfMljeYY=
 github.com/autamus/go-parspack v0.2.1-0.20210524192316-80acea454f38 h1:akvTt1KqwAI1SbEmA2cwX7vKUQnZ2UraXlv4EBZqAXA=
 github.com/autamus/go-parspack v0.2.1-0.20210524192316-80acea454f38/go.mod h1:eOgRsyaj7Ctq6HndHaUPjkqf9bGkeehFyr9sfMljeYY=
