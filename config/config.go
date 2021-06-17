@@ -72,6 +72,8 @@ func defaultConfig() {
 	Global.General.Version = "0.0.1"
 	Global.Parsers.Loaded = "spack,shpc"
 	Global.Containers.Path = "containers/"
+	Global.Containers.DefaultEnvPath = "default.yaml"
+	Global.Template.Path = "default.md"
 	Global.Packages.Path = "spack/"
 	Global.Repo.Path = "."
 }

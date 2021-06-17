@@ -69,14 +69,14 @@ func (a *Article) SetDate(new time.Time) {
 
 func ParseArticle(libraryPath, containerName string) (result Article, err error) {
 	err = filepath.Walk(libraryPath, func(path string, info os.FileInfo, err error) error {
-		if path == containerName+".md" {
+		if strings.HasSuffix(path, containerName+".md") {
 			// Read in file
 			fileRaw, err := ioutil.ReadFile(path)
 			if err != nil {
 				return err
 			}
 			yamlRaw := strings.Split(string(fileRaw), "---")[1]
-			err = yaml.Unmarshal([]byte(yamlRaw), result)
+			err = yaml.Unmarshal([]byte(yamlRaw), &result)
 			if err != nil {
 				return err
 			}
