@@ -69,7 +69,7 @@ func (a *Article) SetDate(new time.Time) {
 
 func ParseArticle(libraryPath, containerName string) (result Article, err error) {
 	err = filepath.Walk(libraryPath, func(path string, info os.FileInfo, err error) error {
-		if strings.HasSuffix(path, containerName+".md") {
+		if strings.HasSuffix(path, filepath.Join(libraryPath, containerName+".md")) {
 			// Read in file
 			fileRaw, err := ioutil.ReadFile(path)
 			if err != nil {
