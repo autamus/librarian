@@ -155,7 +155,8 @@ func main() {
 
 func isFastForward(err error) bool {
 	if err != nil {
-		if strings.HasPrefix(err.Error(), "non-fast-forward update") {
+		if strings.HasPrefix(err.Error(), "non-fast-forward update") ||
+			strings.HasPrefix(err.Error(), "command error") {
 			return true
 		}
 		log.Fatal(err)
