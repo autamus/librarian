@@ -103,12 +103,6 @@ func main() {
 	article.SetSize(currentSize)
 	article.SetDate(time.Now())
 
-	// Pull changes to branch
-	err = git.Pull(path, config.Global.Git.Username, config.Global.Git.Token)
-	if err != nil && err.Error() != "already up-to-date" {
-		log.Fatal(err)
-	}
-
 	err = repo.WriteArticle(libraryPath, templatePath, article)
 	if err != nil {
 		log.Fatal(err)
@@ -126,18 +120,48 @@ func main() {
 		log.Fatal(err)
 	}
 
+	fmt.Println("Waiting...")
+	time.Sleep(10 * time.Second)
+
 	// Push changes back to repository
-	err = git.Push(path, config.Global.Git.Username, config.Global.Git.Token)
-	for err != nil {
-		err = git.Pull(path, config.Global.Git.Username, config.Global.Git.Token)
+	for isFastForward(git.Push(path, config.Global.Git.Username, config.Global.Git.Token)) {
+		for isFastForward(git.Pull(path, config.Global.Git.Username, config.Global.Git.Token)) {
+			err = git.Reset(path)
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
 		if err != nil {
 			log.Fatal(err)
 		}
-		err = git.Push(path, config.Global.Git.Username, config.Global.Git.Token)
+		// Commit changes to repository
+		err = git.Commit(path, fmt.Sprintf("Update %s to %s at %s",
+			currentContainer,
+			currentVersion,
+			time.Now().String()),
+			config.Global.Git.Name,
+			config.Global.Git.Email,
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	err = git.SwitchBranch(path, originalBranch)
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func isFastForward(err error) bool {
+	if err != nil {
+		if strings.HasPrefix(err.Error(), "non-fast-forward update") {
+			return true
+		}
+		log.Fatal(err)
+	}
+	return false
 }
