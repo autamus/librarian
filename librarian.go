@@ -120,9 +120,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println("Waiting...")
-	time.Sleep(10 * time.Second)
-
 	// Push changes back to repository
 	for isFastForward(git.Push(path, config.Global.Git.Username, config.Global.Git.Token)) {
 		for isFastForward(git.Pull(path, config.Global.Git.Username, config.Global.Git.Token)) {
