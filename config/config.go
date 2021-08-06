@@ -69,13 +69,15 @@ func init() {
 }
 
 func defaultConfig() {
-	Global.General.Version = "0.0.5"
+	Global.General.Version = "0.0.8"
 	Global.Parsers.Loaded = "spack,shpc"
 	Global.Containers.Path = "containers/"
 	Global.Containers.DefaultEnvPath = "default.yaml"
 	Global.Template.Path = "default.md"
 	Global.Packages.Path = "spack/"
 	Global.Repo.Path = "."
+	Global.Repo.PagesBranch = "gh-pages"
+	Global.Library.Path = "_library"
 }
 
 func parseConfigEnv() {

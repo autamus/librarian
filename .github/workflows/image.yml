@@ -1,4 +1,4 @@
-name: Publish BuildConfig Image
+name: Publish Librarian Image
 
 on:
   push:
