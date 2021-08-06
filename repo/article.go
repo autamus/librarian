@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"sort"
 	"strings"
 	"text/template"
 	"time"
@@ -87,6 +88,9 @@ func ParseArticle(libraryPath, containerName string) (result Article, err error)
 }
 
 func WriteArticle(libraryPath, templatePath string, article Article) (err error) {
+	// Sort Versions in article metadata.
+	sort.Strings(article.Versions)
+
 	// Write YAML Data
 	out, err := yaml.Marshal(article)
 	if err != nil {
