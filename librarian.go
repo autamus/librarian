@@ -131,6 +131,10 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
+		err = repo.WriteArticle(libraryPath, templatePath, article)
+		if err != nil {
+			log.Fatal(err)
+		}
 		// Commit changes to repository
 		err = git.Commit(path, fmt.Sprintf("Update %s to %s at %s",
 			currentContainer,
