@@ -79,11 +79,6 @@ func main() {
 			log.Fatal(err)
 		}
 	}
-	originalBranch, err := git.GetBranchName(path)
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	// Switch to gh-pages branch
 	err = git.SwitchBranch(path, pagesBranch)
 	if err != nil {
@@ -147,11 +142,6 @@ func main() {
 			log.Fatal(err)
 		}
 	}
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = git.SwitchBranch(path, originalBranch)
 	if err != nil {
 		log.Fatal(err)
 	}
