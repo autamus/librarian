@@ -7,8 +7,7 @@ import (
 	"strings"
 	"time"
 
-	git "github.com/autamus/binoc/repo"
-	parser "github.com/autamus/binoc/repo"
+	binoc "github.com/autamus/binoc/repo"
 	builder "github.com/autamus/builder/repo"
 	"github.com/autamus/librarian/config"
 	"github.com/autamus/librarian/repo"
@@ -24,8 +23,6 @@ func main() {
 `)
 	fmt.Printf("Application Version: v%s\n", config.Global.General.Version)
 	fmt.Println()
-	// Initialize parser functionality
-	parser.Init(strings.Split(config.Global.Parsers.Loaded, ","))
 
 	// Set inital values for Repository
 	path := config.Global.Repo.Path
@@ -39,6 +36,20 @@ func main() {
 	currentSize := config.Global.Containers.Size
 	currentVersion := config.Global.Containers.Version
 	currentDescription := ""
+
+	// Initialize parser functionality
+	binoc, err := binoc.Init(path,
+		strings.Split(config.Global.Parsers.Loaded, ","),
+		&binoc.RepoGitOptions{
+			Name:     config.Global.Git.Name,
+			Username: config.Global.Git.Username,
+			Email:    config.Global.Git.Email,
+			Token:    config.Global.Git.Token,
+		},
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	fmt.Println("[Generating Docs for " + currentContainer + "]")
 
@@ -60,7 +71,7 @@ func main() {
 			log.Fatal(err)
 		}
 		// Parse package for main spec
-		result, err := parser.Parse(specPath)
+		result, err := binoc.Parse(specPath)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -73,14 +84,14 @@ func main() {
 	}
 
 	// Pull gh-branch branch to update if possible.
-	err = git.PullBranch(path, pagesBranch)
+	err = binoc.PullBranch(pagesBranch)
 	if err != nil {
 		if err != nil && err.Error() != "branch already exists" {
 			log.Fatal(err)
 		}
 	}
 	// Switch to gh-pages branch
-	err = git.SwitchBranch(path, pagesBranch)
+	err = binoc.SwitchBranch(pagesBranch)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -104,21 +115,19 @@ func main() {
 	}
 
 	// Commit changes to repository
-	err = git.Commit(path, fmt.Sprintf("Update %s to %s at %s",
+	err = binoc.Commit(fmt.Sprintf("Update %s to %s at %s",
 		currentContainer,
 		currentVersion,
 		time.Now().String()),
-		config.Global.Git.Name,
-		config.Global.Git.Email,
 	)
 	for err != nil {
 		log.Fatal(err)
 	}
 
 	// Push changes back to repository
-	for isFastForward(git.Push(path, config.Global.Git.Username, config.Global.Git.Token)) {
-		for isFastForward(git.Pull(path, config.Global.Git.Username, config.Global.Git.Token)) {
-			err = git.Reset(path)
+	for isFastForward(binoc.Push()) {
+		for isFastForward(binoc.Pull()) {
+			err = binoc.Reset()
 			if err != nil {
 				log.Fatal(err)
 			}
@@ -131,12 +140,10 @@ func main() {
 			log.Fatal(err)
 		}
 		// Commit changes to repository
-		err = git.Commit(path, fmt.Sprintf("Update %s to %s at %s",
+		err = binoc.Commit(fmt.Sprintf("Update %s to %s at %s",
 			currentContainer,
 			currentVersion,
 			time.Now().String()),
-			config.Global.Git.Name,
-			config.Global.Git.Email,
 		)
 		if err != nil {
 			log.Fatal(err)
