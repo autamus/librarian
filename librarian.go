@@ -71,7 +71,7 @@ func main() {
 			log.Fatal(err)
 		}
 		// Parse package for main spec
-		result, err := binoc.Parse(specPath)
+		result, err := binoc.Parse(specPath, false)
 		if err != nil {
 			log.Fatal(err)
 		}

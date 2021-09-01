@@ -39,8 +39,8 @@ github.com/armon/go-socks5 v0.0.0-20160902184237-e75332964ef5 h1:0CwZNZbxp69SHPd
 github.com/armon/go-socks5 v0.0.0-20160902184237-e75332964ef5/go.mod h1:wHh0iHkYZB8zMSxRWpUBQtwG5a7fFgvEO+odwuTv2gs=
 github.com/aryann/difflib v0.0.0-20170710044230-e206f873d14a/go.mod h1:DAHtR1m6lCRdSC2Tm3DSWRPvIPr6xNKyeHdqDQSQT+A=
 github.com/autamus/binoc v0.4.0/go.mod h1:WkxfkFSlW29Trm5nWCi34zogHBUlB4CbOMmynvetbp4=
-github.com/autamus/binoc v0.4.4 h1:ZAbPE4UBLPf9SIgeoJZHRb+VPfyh2iHpv2VxzyHxmR4=
-github.com/autamus/binoc v0.4.4/go.mod h1:Svc66wD1GPZbYS7JP9wjFaoZerk3H8OS7vFsS7UIVUY=
+github.com/autamus/binoc v0.4.5 h1:cewuXoTutv5hdeyzEPDs1v36rbYweB6iajzyy5h4ySc=
+github.com/autamus/binoc v0.4.5/go.mod h1:Svc66wD1GPZbYS7JP9wjFaoZerk3H8OS7vFsS7UIVUY=
 github.com/autamus/builder v0.2.4 h1:Lp2R/MUwh+NGUFNx1vP9438Z6uhlPLJVjEczAX6sTkA=
 github.com/autamus/builder v0.2.4/go.mod h1:ujWBQyZkhtaej3QiAUnkoS2QwAwSM0rvEbbDAaGw044=
 github.com/autamus/go-parspack v0.2.5/go.mod h1:eOgRsyaj7Ctq6HndHaUPjkqf9bGkeehFyr9sfMljeYY=
